@@ -1,0 +1,29 @@
+{% extends "layout.html" %} {% block body %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				<a href="/">
+					<span class="glyphicon glyphicon-arrow-left"></span>
+				</a>
+			</p>
+			<p>{{ entries.time }}<br/>
+				{{ entries.us }} {{ entries.us_goals }} - {{ entries.them_goals }} {{ entries.them }}</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<h2><a href="/team/{{entries.us_id}}">{{ entries.us }}</a></h2>
+			<pre>{{ entries.our_players }}
+			</pre>
+		</div>
+
+		<div class="col-sm-6">
+			<h2><a href="/team/{{entries.them_id}}">{{ entries.them }}</a></h2>
+			<pre>{{ entries.their_players }}
+			</pre>
+		</div>
+
+	</div>
+	{% endblock %}

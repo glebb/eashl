@@ -1,0 +1,8 @@
+'''
+Example URLS:
+team stats: https://www.easports.com/iframe/nhl14proclubs/api/platforms/ps4/clubs/219/stats
+team seasonal rank: https://www.easports.com/iframe/nhl14proclubs/api/platforms/ps4/clubs/219/seasonRank?filters=invert
+team recent matches: https://www.easports.com/iframe/nhl14proclubs/api/platforms/ps4/clubs/219/matches?match_type=gameType5&matches_returned=1
+team members: https://www.easports.com/iframe/nhl14proclubs/api/platforms/ps4/clubs/219/members
+team member stats: https://www.easports.com/iframe/nhl14proclubs/api/platforms/ps4/clubs/219/members/172198887,178265767,180961714,181506579,191515516,209448393,275019218,277066790,299134820,332199893,377763242,875842913,1156573089/stats
+'''

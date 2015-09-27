@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block body %}
+<a href="team/{{id}}" class="btn btn-info">Stats</a>
+<a href="/players" class="btn btn-info">Players</a>
+<h2>Match history</h2>
+{% include 'games_table.html' %}
+{% endblock %}

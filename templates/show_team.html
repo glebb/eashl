@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+<p>
+	<a href="/">
+		<span class="glyphicon glyphicon-arrow-left"></span>
+	</a>
+</p>
+{% if home_team %}<a href="/players" class="btn btn-info">Players</a> {% endif %}
+
+<h2>{{ entries.name }}</h2>
+
+<div class="table-responsive">
+	<table class="table" data-toggle="table">
+		<thead>
+			<tr>
+				<th class="time" data-valign="middle">Date</th>
+				<th class="score" data-align="center" data-valign="middle">Score</th>
+				<th data-valign="middle">Against</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for entry in games %}
+			<tr>
+				<td>{{ entry.time }}</td>
+				<td class="{{ entry.result }}">{% if home_team %}<a class="btn btn-link score-data" href="/game/{{ entry.id }}">{% endif %}{{ entry.us_goals }} - {{ entry.them_goals }}{% if home_team %}</a>{% endif %}</td>
+				<td><a href="/team/{{ entry.them_id }}">{{ entry.them }}</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+</div>
+<div>
+	<pre id="stats">{{ entries.stats }}</pre>
+</div>
+{% endblock %}

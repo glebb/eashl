@@ -1,0 +1,22 @@
+<div class="table-responsive">
+	<table class="table" data-toggle="table" data-search="true" data-pagination="true" data-page-size="25" data-page-list="[25,50,100,All]" data-page-number="1">
+		<thead>
+			<tr>
+				<th data-sortable="true" class="time" data-valign="middle">Date</th>
+				<th class="score" data-align="center" data-valign="middle">Score</th>
+				<th data-valign="middle">Against</th>
+				<th data-valign="middle">Us / them</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for entry in games %}
+			<tr>
+				<td>{{ entry.time }}</td>
+				<td class="{{ entry.result }}"><a class="btn btn-link score-data" href="/game/{{ entry.id }}">{{ entry.us_goals }} - {{ entry.them_goals }}</a></td>
+				<td><a href="/team/{{ entry.them_id }}">{{ entry.them }}</a></td>
+				<td>{{ entry.us_memberstring }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
