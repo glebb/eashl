@@ -20,8 +20,9 @@ The app uses public ea sports urls to fetch data in json format (check example_u
 ## Configuration ##
 * Edit settings.py and set team id for the wanted team, platform (ps4, xboxone) and amount of matches to be fetched via "update_our_team_games.py".
 * Replace static/logo.png with your selected team logo.
+* chmod +x update_our_team_games.py
 * Run update_our_team_games.py manually, and check that it populates mongodb database eashl and collection our_games. To get some history data, fetch e.g. 50 matches first. Afterwards, remember to set the configuration value to be less, as fetching large amount of match data takes a lot of time. 1-5 matches should be fine.
 * Setup cron to run update_our_team_games.py e.g. once in 30 minutes. (e.g.
-	*/30 * * * * /home/bodhi/apps/mhstats/update_our_team_games.py)
+	*/30 * * * * /home/dille/eashl/update_our_team_games.py)
 * Run the server.py via gunicorn. You can also configure it to run with Nginx (see start.sh)
 * Try it out. It should be running on your host on port 5000. If it doesn't work, fix it and do a pull request.
