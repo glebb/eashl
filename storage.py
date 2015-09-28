@@ -22,11 +22,11 @@ def stats_for(game, entry, us=HOME_TEAM):
             entry['us_goals'] = game['clubs'][club]['score']
             entry['us_memberstring'] = game['clubs'][club]['memberstring']
             if int(game['clubs'][club]['goals']) > int(game['clubs'][club]['goalsAgainst']):
-                entry['result'] = "win"
+                entry['result'] = "label label-success"
             elif int(game['clubs'][club]['goals']) < int(game['clubs'][club]['goalsAgainst']):
-                entry['result'] = "lose"
+                entry['result'] = "label label-danger"
             else:
-                entry['result'] = "tie"
+                entry['result'] = "label label-default"
         else:
             entry['them_id'] = club
             entry['them_memberstring'] = game['clubs'][club]['memberstring']

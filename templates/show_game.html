@@ -2,20 +2,19 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<p>{{ entries.time }}<br/>
-				{{ entries.us }} {{ entries.us_goals }} - {{ entries.them_goals }} {{ entries.them }}</p>
+			<h2>{{ entries.us }} {{ entries.us_goals }} - {{ entries.them_goals }} {{ entries.them }} | {{ entries.time }} </h2>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-6">
-			<h2><a href="/team/{{entries.us_id}}">{{ entries.us }}</a></h2>
+			<h3><a href="/team/{{entries.us_id}}">{{ entries.us }}</a></h3>
 			<pre>{{ entries.our_players }}
 			</pre>
 		</div>
 
 		<div class="col-sm-6">
-			<h2><a href="/team/{{entries.them_id}}">{{ entries.them }}</a></h2>
+			<h3><a href="/team/{{entries.them_id}}">{{ entries.them }}</a></h3>
 			<pre>{{ entries.their_players }}
 			</pre>
 		</div>
