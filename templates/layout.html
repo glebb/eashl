@@ -16,6 +16,11 @@
 			background: #eee;
 		}
 
+		h1,h2,h3 {
+			color: #f432a8;
+			font-weight: bold;
+		}
+
 		.page {
 			margin: 0.2em auto;
 			background: white;
@@ -41,6 +46,15 @@
 		.footer {
 			text-align: center;
 		}
+
+		.section,.table-responsive {
+			background-color: white;
+			border-radius: 6px;
+		    border: 2px solid #f432a8;
+			background-color: white;
+			padding: 1em;
+		}
+
 	</style>
 	{% block head %}{% endblock %}
 </head>
@@ -53,10 +67,8 @@
   			<li role="presentation" class="{{page}}"><a href="/team">Stats</a></li>
   			<li role="presentation" class="{{page}}"><a href="/players">Players</a></li>
 		</ul>
-		<div class="well well-sm">
-		<div class="page-header">
+		<div class="page-header section">
 		  <h1><img class="responsive" src="{{ url_for('static', filename='logo.png') }}" alt="Team logo" /> <small>EASHL&nbsp;stats</small></h1>
-		</div>
 		</div>
 
 		{% block body %}{% endblock %}

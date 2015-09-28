@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
-<h2>{{ entries.name }} <small>{{entries['data']['record']}}</small></h2>
 <div class="table-responsive">
+	<h2>{{ entries.name }} <small>{{entries['data']['record']}}</small></h2>
+
 	<table class="table" data-toggle="table">
 		<thead>
 			<tr>
@@ -29,9 +30,10 @@
 		</tbody>
 	</table>
 </div>
-
-<h3>Recent matches</h3>
+<br/>
 <div class="table-responsive">
+	<h3>Recent matches</h3>
+
 	<table class="table" data-toggle="table">
 		<thead>
 			<tr>
@@ -52,11 +54,10 @@
 	</table>
 
 </div>
-<div class="well">
-	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#details" aria-expanded="false" aria-controls="details">Details</button>
-		<div class="collapse well" id="details">
-		  <pre id="stats">{{ entries.stats }}</pre>
-	  	</div>
+<br />
+<div class="section" id="details">
+	<h2>Details</h2>
+  	<pre id="stats">{{ entries.stats }}</pre>
 </div>
 
 {% endblock %}
