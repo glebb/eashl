@@ -6,7 +6,7 @@ import urllib
 from pymemcache.client.base import Client
 
 from settings import *
-from storage import stats_for, update_team
+from storage import stats_for, update_team, get_club_personas
 
 #from server import app
 

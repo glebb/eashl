@@ -1,14 +1,8 @@
 {% extends "layout.html" %} {% block body %}
-<p>
-	<a href="/">
-		<span class="glyphicon glyphicon-arrow-left"></span>
-	</a>
-</p>
-
 <h2>Stats by position</h2>
 <div class="row">
 	<div class="col-md-6">
-		<h2>Left Wing</h2>
+		<h3>Left Wing</h3>
 		<div class="table-responsive">
 			<table class="table" data-toggle="table">
 				{% include 'position_table_headers.html' %}
@@ -19,7 +13,7 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<h2>Center</h2>
+		<h3>Center</h3>
 		<div class="table-responsive">
 			<table class="table" data-toggle="table">
 				{% include 'position_table_headers.html' %}
@@ -32,7 +26,7 @@
 </div>
 <div class="row">
 	<div class="col-md-6">
-		<h2>Right Wing</h2>
+		<h3>Right Wing</h3>
 		<div class="table-responsive">
 			<table class="table" data-toggle="table">
 				{% include 'position_table_headers.html' %}
@@ -43,7 +37,7 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<h2>Defender</h2>
+		<h3>Defender</h3>
 		<div class="table-responsive">
 			<table class="table" data-toggle="table">
 				{% include 'position_table_headers.html' %}

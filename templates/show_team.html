@@ -1,14 +1,36 @@
 {% extends "layout.html" %}
 {% block body %}
-<p>
-	<a href="/">
-		<span class="glyphicon glyphicon-arrow-left"></span>
-	</a>
-</p>
-{% if home_team %}<a href="/players" class="btn btn-info">Players</a> {% endif %}
+<h2>{{ entries.name }} <small>{{entries['data']['record']}}</small></h2>
+<div class="table-responsive">
+	<table class="table" data-toggle="table">
+		<thead>
+			<tr>
+				<th>OTL</th>
+				<th>GF</th>
+				<th>GA</th>
+				<th>PP%</th>
+				<th>PK%</th>
+				<th>FOP%</th>
+				<th>HPG</th>
+				<th>PMPG</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{entries['data']['otl']}}</td>
+				<td>{{entries['data']['gf']}}</td>
+				<td>{{entries['data']['ga']}}</td>
+				<td>{{entries['data']['ppperc']}}</td>
+				<td>{{entries['data']['pkperc']}}</td>
+				<td>{{entries['data']['fop']}}</td>
+				<td>{{entries['data']['hitspg']}}</td>
+				<td>{{entries['data']['pimpg']}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
-<h2>{{ entries.name }}</h2>
-
+<h3>Recent matches</h3>
 <div class="table-responsive">
 	<table class="table" data-toggle="table">
 		<thead>
@@ -30,7 +52,13 @@
 	</table>
 
 </div>
-<div>
-	<pre id="stats">{{ entries.stats }}</pre>
+<div class="well">
+	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#details" aria-expanded="false" aria-controls="collapseExample">
+	  Details
+	</button>
+		<div class="collapse well" id="details">
+		  <pre id="stats">{{ entries.stats }}</pre>
+	  	</div>
 </div>
+
 {% endblock %}

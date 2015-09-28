@@ -5,7 +5,8 @@
 				<th data-sortable="true" class="time" data-valign="middle">Date</th>
 				<th class="score" data-align="center" data-valign="middle">Score</th>
 				<th data-valign="middle">Against</th>
-				<th data-valign="middle">Us / them</th>
+				<th data-valign="middle">Players</th>
+				<th>Us</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -15,6 +16,7 @@
 				<td class="{{ entry.result }}"><a class="btn btn-link score-data" href="/game/{{ entry.id }}">{{ entry.us_goals }} - {{ entry.them_goals }}</a></td>
 				<td><a href="/team/{{ entry.them_id }}">{{ entry.them }}</a></td>
 				<td>{{ entry.us_memberstring }}</td>
+				<td>{{ entry.players }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

@@ -12,7 +12,7 @@ from mapreduce import *
 from settings import *
 
 app = Flask(__name__)
-app.debug = True
+app.debug = DEBUG
 
 client = pymongo.MongoClient()
 db = client.eashl
@@ -48,11 +48,17 @@ def show_games():
         entry['time'] = time.strftime(
             "%d.%m.%y %H:%M", time.localtime(int(game['timestamp'])))
         stats_for(game, entry)
+        players = ""
+        for player in get_players(game['players'][HOME_TEAM], HOME_TEAM):
+            players += player + ", "
+        players = players[:-2]
+        entry['players'] = players
         entries.append(entry)
     return render_template('show_games.html', games=entries, id=HOME_TEAM)
 
 
 @app.route('/game/<id>')
+@app.route('/game/<id>/')
 def show_game(id):
     '''Show statistic for a single game'''
     entry = {}
@@ -72,6 +78,7 @@ def show_game(id):
 
 
 @app.route('/players')
+@app.route('/players/')
 def show_players():
     '''Show player data for HOME_TEAM'''
     players = memcacheclient.get('playerstats')
@@ -111,7 +118,9 @@ def show_players():
 
 
 @app.route('/team/<id>')
-def show_team(id):
+@app.route('/team/')
+@app.route('/team')
+def show_team(id=HOME_TEAM):
     entry = memcacheclient.get('team_stats_' + id)
     if not entry:
         url = "https://www.easports.com/iframe/nhl14proclubs/api/platforms/" + \
@@ -124,9 +133,11 @@ def show_team(id):
             entry['stats'] = json.dumps(
                 temp['raw'][id], indent=2, sort_keys=True)
             entry['name'] = get_team(id)['name']
+            entry['data'] = temp['raw'][id]
         except:
             entry['name'] = "Unknown"
             entry['stats'] = {}
+            entry['data'] = {}
         memcacheclient.set('team_stats_' + id, entry, 60 * 60)
 
     games = memcacheclient.get('team_matches_' + id)

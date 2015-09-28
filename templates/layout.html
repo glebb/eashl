@@ -13,23 +13,7 @@
 
 	<style>
 		body {
-			font-family: sans-serif;
 			background: #eee;
-		}
-
-		a,
-		h1,
-		h2 {
-			color: #377BA8;
-		}
-
-		h1,
-		h2 {
-			font-family: 'Georgia', serif;
-		}
-
-		h2 {
-			font-size: 1.2em;
 		}
 
 		.page {
@@ -51,11 +35,11 @@
 		}
 
 		.time {
-			width: 10em;
+			width: 8em;
 		}
 
 		.score {
-			width: 4em;
+			width: 3em;
 		}
 
 		.score-data {
@@ -76,14 +60,18 @@
 <body>
 	<div class="container-fluid">
 
-		<div class="page">
-			<div class="logo">
-				<a href="/team/219">
-					<img class="responsive" src="{{ url_for('static', filename='logo.png') }}" alt="Murohoki stats" />
-				</a>
-			</div>
-			{% block body %}{% endblock %}
+		<ul class="nav nav-tabs">
+  			<li role="presentation" class="{{page}}"><a href="/">Matches</a></li>
+  			<li role="presentation" class="{{page}}"><a href="/team">Stats</a></li>
+  			<li role="presentation" class="{{page}}"><a href="/players">Players</a></li>
+		</ul>
+		<div class="well well-sm">
+		<div class="page-header">
+		  <h1><img class="responsive" src="{{ url_for('static', filename='logo.png') }}" alt="Team logo" /> <small>EASHL&nbsp;stats</small></h1>
 		</div>
+		</div>
+
+		{% block body %}{% endblock %}
 
 		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 		<!--<script async src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->

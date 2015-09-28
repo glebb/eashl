@@ -1,6 +1,7 @@
 HOME_TEAM = "219"
 PLATFORM = "ps4"
 FETCH_MATCHES = "5"
+DEBUG = True
 
 CLASSES = {"16200": "defensive defender",
 "16201": "offensive defender",
