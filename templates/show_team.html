@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="table-responsive">
-	<h2>{{ entries.name }} <small>{{entries['data']['record']}}</small></h2>
+	<h2>{{ entries.name }} <small>{{entries['data']['wins']}}-{{entries['data']['losses']}}-{{entries['data']['otl']}}</small></h2>
 
 	<table class="table" data-toggle="table">
 		<thead>
 			<tr>
-				<th>OTL</th>
+				<th>GP</th>
 				<th>GF</th>
 				<th>GA</th>
 				<th>PP%</th>
@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>{{entries['data']['otl']}}</td>
+				<td>{{entries['data']['gp']}}</td>
 				<td>{{entries['data']['gf']}}</td>
 				<td>{{entries['data']['ga']}}</td>
 				<td>{{entries['data']['ppperc']}}</td>
