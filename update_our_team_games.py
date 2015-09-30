@@ -11,6 +11,7 @@ response = urllib.urlopen(url)
 temp = json.loads(response.read())
 
 client = MongoClient()
+client.eashl.authenticate(MONGODBUSER, MONGODBPWD)
 db = client.eashl
 
 for key, value in temp['raw'].iteritems():
