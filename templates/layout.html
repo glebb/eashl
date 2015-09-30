@@ -84,6 +84,15 @@
   ga('send', 'pageview');
 
 </script>
+<div id="desktopTest" class="hidden-xs"></div>
+<script>
+if (!$('#desktopTest').is(':hidden')) {
+    $("th").each(function(header, value) {
+		$(this).data("visible", "true");
+	});
+}
+</script>
+
 </body>
 
 </html>

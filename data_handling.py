@@ -11,6 +11,7 @@ from storage import stats_for, update_team, get_club_personas
 #from server import app
 
 client = pymongo.MongoClient()
+client.eashl.authenticate(MONGODBUSER, MONGODBPWD)
 db = client.eashl
 
 memcacheclient = Client(('localhost', 11211))

@@ -9,6 +9,7 @@ from settings import *
 import data_handling
 
 client = pymongo.MongoClient()
+client.eashl.authenticate(MONGODBUSER, MONGODBPWD)
 db = client.eashl
 
 memcacheclient = Client(('localhost', 11211))

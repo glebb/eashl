@@ -21,6 +21,7 @@ The app uses public ea sports urls to fetch data in json format (check example_u
 * Edit settings.py and set team id for the wanted team, platform (ps4, xboxone) and amount of matches to be fetched via "update_our_team_games.py".
 * Replace static/logo.png with your selected team logo.
 * chmod +x update_our_team_games.py
+* create db eashl in mongodb and set user password with readwrite permission (define also in settings.py)
 * Run update_our_team_games.py manually, and check that it populates mongodb database eashl and collection our_games. To get some history data, fetch e.g. 50 matches first. Afterwards, remember to set the configuration value to be less, as fetching large amount of match data takes a lot of time. 1-5 matches should be fine.
 * Setup cron to run update_our_team_games.py e.g. once in 30 minutes. (e.g.
 	*/30 * * * * /home/dille/eashl/update_our_team_games.py)

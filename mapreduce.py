@@ -1,7 +1,11 @@
 import pymongo
 from bson.code import Code
 
+from settings import *
+
+
 client = pymongo.MongoClient()
+client.eashl.authenticate(MONGODBUSER, MONGODBPWD)
 db = client.eashl
 
 def get_map_function(position):

@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.debug = DEBUG
 
 client = pymongo.MongoClient()
+client.eashl.authenticate(MONGODBUSER, MONGODBPWD)
 db = client.eashl
 
 
