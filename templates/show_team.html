@@ -3,17 +3,17 @@
 <div class="table-responsive">
 	<h2>{{ entries.name }} <small>{{entries['data']['wins']}}-{{entries['data']['losses']}}-{{entries['data']['otl']}}</small></h2>
 
-	<table class="table" data-toggle="table">
+	<table class="table" data-toggle="table" data-show-columns="true">
 		<thead>
 			<tr>
 				<th>GP</th>
 				<th>GF</th>
 				<th>GA</th>
-				<th>PP%</th>
-				<th>PK%</th>
-				<th>FOP%</th>
-				<th>HPG</th>
-				<th>PMPG</th>
+				<th>PP</th>
+				<th>PK</th>
+				<th>FOP</th>
+				<th data-visible="false">HPG</th>
+				<th data-visible="false">PMPG</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,9 +29,6 @@
 			</tr>
 		</tbody>
 	</table>
-</div>
-<br/>
-<div class="table-responsive">
 	<h3>Recent matches</h3>
 
 	<table class="table" data-toggle="table">

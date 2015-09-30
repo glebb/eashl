@@ -1,8 +1,5 @@
 {% extends "layout.html" %} {% block body %}
-<div class="section">
-<h2>Stats by position</h2>
-</div>
-<br/>
+
 <div class="row">
 	<div class="col-md-6">
 		<div class="table-responsive">
@@ -65,11 +62,9 @@
 	<table class="table" data-toggle="table">
 		<thead>
 			<tr>
-				{% for entry in data %} {% if entry == "playername" or entry == "totalgp" or entry == "skpoints" %}
+				{% for entry in data %}
 				<th data-sortable="true">{{entry}}</th>
-				{% else %}
-				<th data-sortable="true">{{entry}}</th>
-				{% endif %} {% endfor %}
+				{% endfor %}
 			</tr>
 		</thead>
 		<tbody>
