@@ -58,8 +58,8 @@ def show_games():
     return render_template('show_games.html', games=entries, id=HOME_TEAM)
 
 
-@app.route('/game/<id>')
 @app.route('/game/<id>/')
+@app.route('/game/<id>')
 def show_game(id):
     '''Show statistic for a single game'''
     entry = {}
@@ -78,8 +78,8 @@ def show_game(id):
     return render_template('show_game.html', entries=entry)
 
 
-@app.route('/players')
 @app.route('/players/')
+@app.route('/players')
 def show_players():
     '''Show player data for HOME_TEAM'''
     players = memcacheclient.get('playerstats')
@@ -117,6 +117,24 @@ def show_players():
 
     return render_template('show_players.html', players=players, data=PLAYERDATA, defenders=defenders, lws=lws, centers=centers, rws=rws)
 
+@app.route('/classes/')
+@app.route('/classes')
+def show_classes():
+    '''Show player class data for HOME_TEAM'''
+    centers = db.our_games.map_reduce(get_map_function(
+        "4", p_class=True), get_reduce_function("4"), "centers").find()
+    centers = format_player_data(centers, p_class=True)
+    lws = db.our_games.map_reduce(get_map_function(
+        "3", p_class=True), get_reduce_function("3"), "lws").find()
+    lws = format_player_data(lws, p_class=True)
+    defenders = db.our_games.map_reduce(get_map_function(
+        "1", p_class=True), get_reduce_function("1"), "defs").find()
+    defenders = format_player_data(defenders, p_class=True)
+    rws = db.our_games.map_reduce(get_map_function(
+        "5", p_class=True), get_reduce_function("5"), "rws").find()
+    rws = format_player_data(rws, p_class=True)
+
+    return render_template('show_classes.html', data=PLAYERDATA, defenders=defenders, lws=lws, centers=centers, rws=rws)
 
 @app.route('/team/<id>')
 @app.route('/team/')

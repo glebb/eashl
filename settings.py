@@ -4,7 +4,7 @@ FETCH_MATCHES = "5"
 MONGODBUSER = "eashl"
 MONGODBPWD = "eashl"
 
-DEBUG = True
+DEBUG = False
 
 CLASSES = {"16200": "defensive defender",
 "16201": "offensive defender",

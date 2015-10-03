@@ -1,0 +1,57 @@
+{% extends "layout.html" %} {% block body %}
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="table-responsive">
+			<h3>Left Wing</h3>
+
+			<table class="table" data-toggle="table">
+				{% include 'position_table_headers.html' %}
+				<tbody>
+					{% for player in lws %} {% include 'position_table_data.html' %} {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="table-responsive">
+			<h3>Center</h3>
+
+			<table class="table" data-toggle="table">
+				{% include 'position_table_headers.html' %}
+				<tbody>
+					{% for player in centers %} {% include 'position_table_data.html' %} {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-6">
+		<div class="table-responsive">
+			<h3>Right Wing</h3>
+
+			<table class="table" data-toggle="table">
+				{% include 'position_table_headers.html' %}
+				<tbody>
+					{% for player in rws %} {% include 'position_table_data.html' %} {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="table-responsive">
+			<h3>Defender</h3>
+
+			<table class="table" data-toggle="table">
+				{% include 'position_table_headers.html' %}
+				<tbody>
+					{% for player in defenders %} {% include 'position_table_data.html' %} {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+{% endblock %}

@@ -4,8 +4,9 @@ Web app to track stats for selected eashl team.
 ## Features ##
 * Searchable match history with complete game statistics for selected team.
 * Overall player statistics for selected team
-* Position based statistics for selected team
-* Current team statistics with list of recent matches for opponents
+* Position based statistics for players in selected team
+* Class based statistics for selected team per position
+* Current team statistics (with list of recent matches for opponents)
 
 ## Requirements ##
 * Python 2.7

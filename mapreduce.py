@@ -3,34 +3,37 @@ from bson.code import Code
 
 from settings import *
 
-
 client = pymongo.MongoClient()
 client.eashl.authenticate(MONGODBUSER, MONGODBPWD)
 db = client.eashl
 
-def get_map_function(position):
+
+def get_map_function(position, p_class=False):
     '''Javascript map function for mongodb for fetching player data by position.'''
-    reduce = Code("function () {"
-                  "  var res = 0;"
-                  "  if (parseInt(this['clubs']['219']['goals']) > parseInt(this['clubs']['219']['goalsAgainst'])) res = 1;"
-                  "  for (var key in this.players['219']) {"
-                  "    if (this.players['219'].hasOwnProperty(key)) {"
-                  "       if (this.players['219'][key].position == '" +
-                  position + "'){"
-                  "          entry = {};"
-                  "          entry['games'] = 1;"
-                  "          entry['wins'] = res;"
-                  "          entry['skgiveaways'] = parseInt(this.players['219'][key].skgiveaways);"
-                  "          entry['sktakeaways'] = parseInt(this.players['219'][key].sktakeaways);"
-                  "          entry['skgoals'] = parseInt(this.players['219'][key].skgoals);"
-                  "          entry['skassists'] = parseInt(this.players['219'][key].skassists);"
-                  "          entry['skplusmin'] = parseInt(this.players['219'][key].skplusmin);"
-                  "          entry['skpim'] = parseInt(this.players['219'][key].skpim);"
-                  "          emit(key, entry);"
-                  "       }"
-                  "    }"
-                  "  }"
-                  "}")
+    f = "function () {" \
+        "  var res = 0;" \
+        "  if (parseInt(this['clubs']['219']['goals']) >  parseInt(this['clubs']['219']['goalsAgainst'])) res = 1;" \
+        "  for (var key in this.players['219']) {" \
+        "    if (this.players['219'].hasOwnProperty(key)) {" \
+        "       if (this.players['219'][key].position == '" + position + "'){" \
+        "          entry = {};" \
+        "          entry['games'] = 1;" \
+        "          entry['wins'] = res;" \
+        "          entry['skgiveaways'] = parseInt(this.players['219'][key].skgiveaways);" \
+        "          entry['sktakeaways'] = parseInt(this.players['219'][key].sktakeaways);" \
+        "          entry['skgoals'] = parseInt(this.players['219'][key].skgoals);" \
+        "          entry['skassists'] = parseInt(this.players['219'][key].skassists);" \
+        "          entry['skplusmin'] = parseInt(this.players['219'][key].skplusmin);" \
+        "          entry['skpim'] = parseInt(this.players['219'][key].skpim);"
+    if p_class:
+        f += "          emit(this.players['219'][key]['class'], entry);"
+    else:
+        f += "          emit(key, entry);"
+    f += "       }" \
+        "    }" \
+        "  }" \
+        "}"
+    reduce = Code(f)
     return reduce
 
 
@@ -53,7 +56,7 @@ def get_reduce_function(position):
     return reduce
 
 
-def format_player_data(collection):
+def format_player_data(collection, p_class=False):
     '''Format and count averages for data produced by map reduce'''
     plist = []
     for player in collection:
@@ -78,8 +81,11 @@ def format_player_data(collection):
         temp['penaltiesavg'] = "{0:.1f}".format(penaltiesavg)
 
         temp['games'] = "{0:.0f}".format(player['value']['games'])
-        temp['name'] = db.personas.find_one(
-            {"_id": player["_id"]})['personaname']
+        if p_class:
+            temp['name'] = CLASSES[player["_id"]]
+        else:
+            temp['name'] = db.personas.find_one(
+                {"_id": player["_id"]})['personaname']
         plist.append(temp)
     plist.sort(key=lambda b: float(b['winpct']), reverse=True)
     return plist
