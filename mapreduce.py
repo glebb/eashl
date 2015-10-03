@@ -10,23 +10,24 @@ db = client.eashl
 
 def get_map_function(position, p_class=False):
     '''Javascript map function for mongodb for fetching player data by position.'''
-    f = "function () {" \
-        "  var res = 0;" \
-        "  if (parseInt(this['clubs']['219']['goals']) >  parseInt(this['clubs']['219']['goalsAgainst'])) res = 1;" \
-        "  for (var key in this.players['219']) {" \
-        "    if (this.players['219'].hasOwnProperty(key)) {" \
-        "       if (this.players['219'][key].position == '" + position + "'){" \
+    f = "function () {"
+    f += "  var home_team = '" + HOME_TEAM + "';"
+    f += "  var res = 0;" \
+        "  if (parseInt(this['clubs'][home_team]['goals']) >  parseInt(this['clubs'][home_team]['goalsAgainst'])) res = 1;" \
+        "  for (var key in this.players[home_team]) {" \
+        "    if (this.players[home_team].hasOwnProperty(key)) {" \
+        "       if (this.players[home_team][key].position == '" + position + "'){" \
         "          entry = {};" \
         "          entry['games'] = 1;" \
         "          entry['wins'] = res;" \
-        "          entry['skgiveaways'] = parseInt(this.players['219'][key].skgiveaways);" \
-        "          entry['sktakeaways'] = parseInt(this.players['219'][key].sktakeaways);" \
-        "          entry['skgoals'] = parseInt(this.players['219'][key].skgoals);" \
-        "          entry['skassists'] = parseInt(this.players['219'][key].skassists);" \
-        "          entry['skplusmin'] = parseInt(this.players['219'][key].skplusmin);" \
-        "          entry['skpim'] = parseInt(this.players['219'][key].skpim);"
+        "          entry['skgiveaways'] = parseInt(this.players[home_team][key].skgiveaways);" \
+        "          entry['sktakeaways'] = parseInt(this.players[home_team][key].sktakeaways);" \
+        "          entry['skgoals'] = parseInt(this.players[home_team][key].skgoals);" \
+        "          entry['skassists'] = parseInt(this.players[home_team][key].skassists);" \
+        "          entry['skplusmin'] = parseInt(this.players[home_team][key].skplusmin);" \
+        "          entry['skpim'] = parseInt(this.players[home_team][key].skpim);"
     if p_class:
-        f += "          emit(this.players['219'][key]['class'], entry);"
+        f += "          emit(this.players[home_team][key]['class'], entry);"
     else:
         f += "          emit(key, entry);"
     f += "       }" \
