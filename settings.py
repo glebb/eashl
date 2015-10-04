@@ -17,9 +17,9 @@ CLASSES = {"16200": "defensive defender",
 "16208": "two-way forward",
 "16209": "enforcer"}
 '''
-"16210": "unknown",
-"16211": "unknown",
-"16212": "unknown",
+"16210": "goalie",
+"16211": "goalie",
+"16212": "goalie",
 "16213": "unknown"}
 '''
 
