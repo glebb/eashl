@@ -28,3 +28,6 @@ The app uses public ea sports urls to fetch data in json format (check example_u
 	*/30 * * * * /home/dille/eashl/update_our_team_games.py)
 * Run the server.py via gunicorn. You can also configure it to run with Nginx (see start.sh)
 * Try it out. It should be running on your host on port 5000. If it doesn't work, fix it and do a pull request.
+
+## Demo ##
+ * http://horros.eu:5000/
