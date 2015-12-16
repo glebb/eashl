@@ -61,6 +61,8 @@ def format_player_data(collection, p_class=False):
     '''Format and count averages for data produced by map reduce'''
     plist = []
     for player in collection:
+        if player['value']['games'] < 10:
+            continue
         temp = {}
         temp['id'] = player['_id']
         games = player['value']['games']
@@ -70,15 +72,15 @@ def format_player_data(collection, p_class=False):
         giveawayavg = float(player['value']['skgiveaways']) / games
         goalsavg = float(player['value']['skgoals']) / games
         assistsavg = float(player['value']['skassists']) / games
-        plusminusavg = float(player['value']['skplusmin']) / games
+        plusminustotal = int(player['value']['skplusmin'])
         penaltiesavg = float(player['value']['skpim']) / games
 
-        temp['winpct'] = "{0:.1f}".format(winpct)
-        temp['giveawayavg'] = "{0:.1f}".format(giveawayavg)
-        temp['takeawayavg'] = "{0:.1f}".format(takeawayavg)
-        temp['goalsavg'] = "{0:.1f}".format(goalsavg)
-        temp['assistsavg'] = "{0:.1f}".format(assistsavg)
-        temp['plusminusavg'] = "{0:.1f}".format(plusminusavg)
+        temp['winpct'] = "{0:.2f}".format(winpct)
+        temp['giveawayavg'] = "{0:.2f}".format(giveawayavg)
+        temp['takeawayavg'] = "{0:.2f}".format(takeawayavg)
+        temp['goalsavg'] = "{0:.2f}".format(goalsavg)
+        temp['assistsavg'] = "{0:.2f}".format(assistsavg)
+        temp['plusminustotal'] = plusminustotal
         temp['penaltiesavg'] = "{0:.1f}".format(penaltiesavg)
 
         temp['games'] = "{0:.0f}".format(player['value']['games'])
