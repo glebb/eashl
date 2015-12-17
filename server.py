@@ -102,6 +102,8 @@ def show_players():
         if result:
             players[player]['playername'] = result['personaname']
 
+    players2 = count_averages(players)
+
     centers = db.our_games.map_reduce(get_map_function(
         "4"), get_reduce_function("4"), "centers").find()
     centers = format_player_data(centers)
@@ -115,7 +117,7 @@ def show_players():
         "5"), get_reduce_function("5"), "rws").find()
     rws = format_player_data(rws)
 
-    return render_template('show_players.html', players=players, data=PLAYERDATA, defenders=defenders, lws=lws, centers=centers, rws=rws)
+    return render_template('show_players.html', players=players2, data=PLAYERDATA, defenders=defenders, lws=lws, centers=centers, rws=rws)
 
 @app.route('/classes/')
 @app.route('/classes')

@@ -52,3 +52,13 @@ def get_players(data, club):
             result[name][key] = value
 
     return result
+
+def count_averages(players):
+    temp = {}
+    for player in players:
+        temp[player] = {}
+        for key in players[player]:
+            temp[player][key] = players[player][key]
+            if key in ('skgoals', 'skassists', 'skpoints' , 'skhits', 'skshots'):
+                temp[player][key+'avg'] = float("{0:.2f}".format(float(players[player][key]) / int(players[player]['totalgp'])))
+    return temp

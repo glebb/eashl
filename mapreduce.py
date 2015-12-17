@@ -24,6 +24,8 @@ def get_map_function(position, p_class=False):
         "          entry['sktakeaways'] = parseInt(this.players[home_team][key].sktakeaways);" \
         "          entry['skgoals'] = parseInt(this.players[home_team][key].skgoals);" \
         "          entry['skassists'] = parseInt(this.players[home_team][key].skassists);" \
+        "          entry['skshots'] = parseInt(this.players[home_team][key].skshots);" \
+        "          entry['skhits'] = parseInt(this.players[home_team][key].skhits);" \
         "          entry['skplusmin'] = parseInt(this.players[home_team][key].skplusmin);" \
         "          entry['skpim'] = parseInt(this.players[home_team][key].skpim);"
     if p_class:
@@ -41,7 +43,7 @@ def get_map_function(position, p_class=False):
 def get_reduce_function(position):
     '''Javascript reduce function for mongodb for aggregating player data by position.'''
     reduce = Code("function (key, values) {"
-                  "  entry={'games':0, 'wins':0, 'sktakeaways':0, 'skgiveaways':0, 'skgoals':0, 'skassists': 0, 'skplusmin': 0, 'skpim':0 };"
+                  "  entry={'games':0, 'wins':0, 'sktakeaways':0, 'skgiveaways':0, 'skgoals':0, 'skassists': 0, 'skshots': 0, 'skhits': 0, 'skplusmin': 0, 'skpim':0 };"
                   "  for (var i = 0; i<values.length; i++) {"
                   "    entry['games'] += values[i]['games'];"
                   "    entry['wins'] += values[i]['wins'];"
@@ -49,6 +51,8 @@ def get_reduce_function(position):
                   "    entry['skgiveaways'] += values[i]['skgiveaways'];"
                   "    entry['skgoals'] += values[i]['skgoals'];"
                   "    entry['skassists'] += values[i]['skassists'];"
+                  "    entry['skshots'] += values[i]['skshots'];"
+                  "    entry['skhits'] += values[i]['skhits'];"
                   "    entry['skplusmin'] += values[i]['skplusmin'];"
                   "    entry['skpim'] += values[i]['skpim'];"
                   "  }"
@@ -72,6 +76,8 @@ def format_player_data(collection, p_class=False):
         giveawayavg = float(player['value']['skgiveaways']) / games
         goalsavg = float(player['value']['skgoals']) / games
         assistsavg = float(player['value']['skassists']) / games
+        shotsavg = float(player['value']['skshots']) / games
+        hitsavg = float(player['value']['skhits']) / games
         plusminustotal = int(player['value']['skplusmin'])
         penaltiesavg = float(player['value']['skpim']) / games
 
@@ -80,6 +86,8 @@ def format_player_data(collection, p_class=False):
         temp['takeawayavg'] = "{0:.2f}".format(takeawayavg)
         temp['goalsavg'] = "{0:.2f}".format(goalsavg)
         temp['assistsavg'] = "{0:.2f}".format(assistsavg)
+        temp['hitsavg'] = "{0:.2f}".format(hitsavg)
+        temp['shotsavg'] = "{0:.2f}".format(shotsavg)
         temp['plusminustotal'] = plusminustotal
         temp['penaltiesavg'] = "{0:.1f}".format(penaltiesavg)
 
