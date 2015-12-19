@@ -15,13 +15,12 @@ CLASSES = {"16200": "defensive defender",
 "16207": "power forward",
 "16205": "playmaker",
 "16208": "two-way forward",
-"16209": "enforcer"}
-'''
+"16209": "enforcer",
 "16210": "goalie",
 "16211": "goalie",
 "16212": "goalie",
 "16213": "unknown"}
-'''
+
 
 PLAYERDATA = [
 "playername",
