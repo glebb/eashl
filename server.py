@@ -70,11 +70,11 @@ def show_game(id):
         "%d.%m.%y %H:%M", time.localtime(int(game['timestamp'])))
     for club in game['clubs']:
         if club == HOME_TEAM:
-            entry['our_players'] = json.dumps(get_players(
-                game['players'][club], club), indent=2, sort_keys=True)
+            entry['our_players'] = get_players(
+                game['players'][club], club)
         else:
-            entry['their_players'] = json.dumps(get_players(
-                game['players'][club], club), indent=2, sort_keys=True)
+            entry['their_players'] = get_players(
+                game['players'][club], club)
     return render_template('show_game.html', entries=entry)
 
 
