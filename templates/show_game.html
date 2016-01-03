@@ -1,28 +1,25 @@
 {% extends "layout.html" %} {% block body %}
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h2>{{ entries.us }} {{ entries.us_goals }} - {{ entries.them_goals }} {{ entries.them }} | {{ entries.time }} </h2>
-		</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>{{ entries.us }} {{ entries.us_goals }} - {{ entries.them_goals }} {{ entries.them }} | {{ entries.time }} </h2>
 	</div>
-
-	<div class="row">
-		<div class="col-sm-6">
-			<div class="section">
-			<h3><a href="/team/{{entries.us_id}}">{{ entries.us }}</a></h3>
-			<p>{% for player in entries.our_players %}
-			{{ player }} [{{ entries.our_players[player].class }}] {{ entries.our_players[player].skgoals }}+{{ entries.our_players[player].skassists }}<br/>
-Hits:&nbsp;{{ entries.our_players[player].skhits }} Pim:&nbsp;{{ entries.our_players[player].skpim }} Shots:&nbsp;{{ entries.our_players[player].skshots }} Takeaways:&nbsp;{{ entries.our_players[player].sktakeaways }} Giveaways:&nbsp;{{ entries.our_players[player].skgiveaways }} Faceoffs won:&nbsp;{{ entries.our_players[player].skfow}}</p>
-{% endfor %}
-		</div></div>
-		<div class="col-sm-6">
-			<div class="section">
-			<h3><a href="/team/{{entries.them_id}}">{{ entries.them }}</a></h3>
-			<p>{% for player in entries.their_players %}
-			{{ player }} {{ entries.their_players[player].class }} {{ entries.their_players[player].skgoals }}+{{ entries.their_players[player].skassists }}<br/>
-Hits:&nbsp;{{ entries.their_players[player].skhits }} Pim:&nbsp;{{ entries.their_players[player].skpim }} Shots:&nbsp;{{ entries.their_players[player].skshots }} Takeaways:&nbsp;{{ entries.their_players[player].sktakeaways }} Giveaways:&nbsp;{{ entries.their_players[player].skgiveaways }} Faceoffs won:&nbsp;{{ entries.their_players[player].skfow}}</p>
-{% endfor %}
-		</div></div>
-
-	</div>
-	{% endblock %}
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="section">
+		<h3><a href="/team/{{entries.us_id}}">{{ entries.us }}</a></h3>
+		{% for player, data in entries.our_players.iteritems() %}
+            {% include 'game_players.html' %}
+        {% endfor %}
+        </div>
+    </div>
+	<div class="col-sm-6">
+		<div class="section">
+		<h3><a href="/team/{{entries.them_id}}">{{ entries.them }}</a></h3>
+        {% for player, data in entries.their_players.iteritems() %}
+            {% include 'game_players.html' %}
+        {% endfor %}
+	    </div>
+    </div>
+</div>
+{% endblock %}
