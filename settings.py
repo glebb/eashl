@@ -19,7 +19,7 @@ CLASSES = {"16200": "defensive defender",
 "16210": "goalie",
 "16211": "goalie",
 "16212": "goalie",
-"16213": "unknown"}
+"16213": "dangler"}
 
 
 PLAYERDATA = [
