@@ -1,4 +1,5 @@
 HOME_TEAM = "219"
+HOME_TEAM_NAME = "Murohoki"
 PLATFORM = "ps4"
 FETCH_MATCHES = "5"
 MONGODBUSER = "eashl"

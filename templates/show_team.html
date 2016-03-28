@@ -44,7 +44,7 @@
 			<tr>
 				<td>{{ entry.time }}</td>
 				<td><span class="{{ entry.result }}">{% if home_team %}<a class="btn btn-link score-data" href="/game/{{ entry.id }}">{% endif %}{{ entry.us_goals }} - {{ entry.them_goals }}{% if home_team %}</a></span>{% endif %}</td>
-				<td><a href="/team/{{ entry.them_id }}">{{ entry.them }}</a></td>
+				<td><a href="/team/{{ entry.them_id }}?name={{entry.them}}">{{ entry.them }}</a></td>
 			</tr>
 			{% endfor %}
 		</tbody>

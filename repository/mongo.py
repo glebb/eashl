@@ -1,17 +1,19 @@
+import sys
+sys.path.insert(0,'..')
+
 import pymongo
 from bson.code import Code
 
-from settings import *
+import settings
 
 client = pymongo.MongoClient()
-client.eashl.authenticate(MONGODBUSER, MONGODBPWD)
+client.eashl.authenticate(settings.MONGODBUSER, settings.MONGODBPWD)
 db = client.eashl
-
 
 def get_map_function(position, p_class=False):
     '''Javascript map function for mongodb for fetching player data by position.'''
     f = "function () {"
-    f += "  var home_team = '" + HOME_TEAM + "';"
+    f += "  var home_team = '" + settings.HOME_TEAM + "';"
     f += "  var res = 0;" \
         "  if (parseInt(this['clubs'][home_team]['goals']) >  parseInt(this['clubs'][home_team]['goalsAgainst'])) res = 1;" \
         "  for (var key in this.players[home_team]) {" \
@@ -61,42 +63,29 @@ def get_reduce_function(position):
     return reduce
 
 
-def format_player_data(collection, p_class=False):
-    '''Format and count averages for data produced by map reduce'''
-    plist = []
-    for player in collection:
-        if player['value']['games'] < 10:
-            continue
-        temp = {}
-        temp['id'] = player['_id']
-        games = player['value']['games']
+def get_games():
+    return db.our_games.find().sort("timestamp", pymongo.DESCENDING)
 
-        winpct = player['value']['wins'] / games * 100
-        takeawayavg = float(player['value']['sktakeaways']) / games
-        giveawayavg = float(player['value']['skgiveaways']) / games
-        goalsavg = float(player['value']['skgoals']) / games
-        assistsavg = float(player['value']['skassists']) / games
-        shotsavg = float(player['value']['skshots']) / games
-        hitsavg = float(player['value']['skhits']) / games
-        plusminustotal = int(player['value']['skplusmin'])
-        penaltiesavg = float(player['value']['skpim']) / games
+def get_team(club_id):
+    return db.clubs.find_one({"_id": club_id})
 
-        temp['winpct'] = "{0:.2f}".format(winpct)
-        temp['giveawayavg'] = "{0:.2f}".format(giveawayavg)
-        temp['takeawayavg'] = "{0:.2f}".format(takeawayavg)
-        temp['goalsavg'] = "{0:.2f}".format(goalsavg)
-        temp['assistsavg'] = "{0:.2f}".format(assistsavg)
-        temp['hitsavg'] = "{0:.2f}".format(hitsavg)
-        temp['shotsavg'] = "{0:.2f}".format(shotsavg)
-        temp['plusminustotal'] = plusminustotal
-        temp['penaltiesavg'] = "{0:.1f}".format(penaltiesavg)
+def get_player(player):
+    return db.personas.find_one({"_id": player})
 
-        temp['games'] = "{0:.0f}".format(player['value']['games'])
-        if p_class:
-            temp['name'] = CLASSES[player["_id"]]
-        else:
-            temp['name'] = db.personas.find_one(
-                {"_id": player["_id"]})['personaname']
-        plist.append(temp)
-    plist.sort(key=lambda b: float(b['winpct']), reverse=True)
-    return plist
+def get_game(game_id):
+    return db.our_games.find_one({"_id": int(game_id)})
+
+def get_centers(p_class):
+    return db.our_games.map_reduce(get_map_function(
+        "4", p_class), get_reduce_function("4"), "centers").find()
+
+def get_lws(p_class):
+    return db.our_games.map_reduce(get_map_function(
+        "3", p_class), get_reduce_function("3"), "lws").find()
+
+def get_rws(p_class):
+    return db.our_games.map_reduce(get_map_function(
+        "5", p_class), get_reduce_function("5"), "rws").find()
+def get_defenders(p_class):
+    return db.our_games.map_reduce(get_map_function(
+        "1", p_class), get_reduce_function("1"), "defs").find()

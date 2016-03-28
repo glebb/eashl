@@ -15,7 +15,7 @@
 			<tr>
 				<td>{{ entry.time }}</td>
 				<td><span class="{{ entry.result }}"><a class="btn btn-link score-data" href="/game/{{ entry.id }}">{{ entry.us_goals }} - {{ entry.them_goals }}</a></span></td>
-				<td><a href="/team/{{ entry.them_id }}">{{ entry.them }}</a></td>
+				<td><a href="/team/{{ entry.them_id }}?name={{entry.them}}">{{ entry.them }}</a></td>
 				<td>{{ entry.us_memberstring }}</td>
 				<td>{{ entry.players }}</td>
 			</tr>
