@@ -6,6 +6,7 @@ MONGODBUSER = "eashl"
 MONGODBPWD = "eashl"
 
 DEBUG = False
+MIN_GAMES_TO_SHOW_IN_STATS = 1
 
 CLASSES = {"16200": "defensive defender",
 "16201": "offensive defender",

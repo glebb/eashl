@@ -18,8 +18,9 @@ def _format_player_data(collection, game_repository, p_class=False):
     '''Format and count averages for data produced by map reduce'''
     plist = []
     for player in collection:
-        if player['value']['games'] < 10:
+        if player['value']['games'] < settings.MIN_GAMES_TO_SHOW_IN_STATS:
             continue
+
         temp = {}
         temp['id'] = player['_id']
         games = player['value']['games']
@@ -48,7 +49,7 @@ def _format_player_data(collection, game_repository, p_class=False):
         if p_class:
             temp['name'] = settings.CLASSES[player["_id"]]
         else:
-            temp['name'] = game_repository.get_player(player["_id"])['personaname']
+            temp['name'] = player['value']['personaName']
         plist.append(temp)
     plist.sort(key=lambda b: float(b['winpct']), reverse=True)
     return plist

@@ -25,6 +25,8 @@ def get_map_function(position, p_class=False):
         "          entry['skgiveaways'] = parseInt(this.players[home_team][key].skgiveaways);" \
         "          entry['sktakeaways'] = parseInt(this.players[home_team][key].sktakeaways);" \
         "          entry['skgoals'] = parseInt(this.players[home_team][key].skgoals);" \
+        "          var name = this.players[home_team][key]['details'].personaName;" \
+        "          if (name) entry['personaName'] = name;" \
         "          entry['skassists'] = parseInt(this.players[home_team][key].skassists);" \
         "          entry['skshots'] = parseInt(this.players[home_team][key].skshots);" \
         "          entry['skhits'] = parseInt(this.players[home_team][key].skhits);" \
@@ -45,7 +47,7 @@ def get_map_function(position, p_class=False):
 def get_reduce_function(position):
     '''Javascript reduce function for mongodb for aggregating player data by position.'''
     reduce = Code("function (key, values) {"
-                  "  entry={'games':0, 'wins':0, 'sktakeaways':0, 'skgiveaways':0, 'skgoals':0, 'skassists': 0, 'skshots': 0, 'skhits': 0, 'skplusmin': 0, 'skpim':0 };"
+                  "  entry={'games':0, 'wins':0, 'sktakeaways':0, 'skgiveaways':0, 'skgoals':0, 'skassists': 0, 'skshots': 0, 'skhits': 0, 'skplusmin': 0, 'skpim':0};"
                   "  for (var i = 0; i<values.length; i++) {"
                   "    entry['games'] += values[i]['games'];"
                   "    entry['wins'] += values[i]['wins'];"
@@ -57,6 +59,7 @@ def get_reduce_function(position):
                   "    entry['skhits'] += values[i]['skhits'];"
                   "    entry['skplusmin'] += values[i]['skplusmin'];"
                   "    entry['skpim'] += values[i]['skpim'];"
+                  "    if (values[i]['personaName']) entry['personaName'] = values[i]['personaName'];"
                   "  }"
                   "  return entry;"
                   "}")
