@@ -51,7 +51,7 @@ def get_players(data, club, game_repository, live_repository):
         for key, value in data[player].iteritems():
             if key == "class":
                 try:
-                    value = CLASSES[value]
+                    value = settings.CLASSES[value]
                 except:
                     pass
             result[name][key] = value
