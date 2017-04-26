@@ -1,3 +1,5 @@
+# This project is not active. Stuff worked until NHL 16 but after that it's not been updated. #
+
 # EA Sports NHL EASHL stats #
 Web app to track stats for selected eashl team.
 
